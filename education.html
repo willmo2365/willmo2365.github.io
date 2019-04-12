@@ -5,12 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
 
-    <title></title>
+    <title>Personal</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBn6fCNufbOC-dejg1Ojju8JOM-SiT9tQQ",
+            authDomain: "webapp1-e9db0.firebaseapp.com",
+            databaseURL: "https://webapp1-e9db0.firebaseio.com",
+            projectId: "webapp1-e9db0",
+            storageBucket: "webapp1-e9db0.appspot.com",
+            messagingSenderId: "1069990919899"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 </head>
 <body>
@@ -49,12 +63,96 @@
                             </ul>
                         </li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li class="menu-has-children"><a href="">Account</a>
+                            <ul>
+                                <li><a href="#signinModal" data-toggle="modal">Sign In</a></li>
+                                <li><a href="#signoutModal" data-toggle="modal">Sign Out</a></li>
+                                <li><a href="#addModal" data-toggle="modal">Add user</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
 </header><!-- #header -->
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="addEmail">Email address</label>
+                        <input type="email" class="form-control" id="addEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="addPassword">Password</label>
+                        <input type="password" class="form-control" id="addPassword" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn" onclick="adduser()" data-dismiss="modal">Add User</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signinModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="signinEmail">Email address</label>
+                        <input type="email" class="form-control" id="signinEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signinPassword">Password</label>
+                        <input type="password" class="form-control" id="signinPassword" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn" onclick="signIn()" data-dismiss="modal">Sign in</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signoutModal" tabindex="-1" role="dialog" aria-labelledby="signoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signoutModalLabel">Sign out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to sign out?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn" onclick="signOut()" data-dismiss="modal">Sign Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- start banner Area -->
 <section class="about-banner">
@@ -255,21 +353,10 @@
 <script src="js/vendor/jquery-2.2.4.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-<script src="js/easing.min.js"></script>
-<script src="js/hoverIntent.js"></script>
 <script src="js/superfish.min.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/jquery.tabs.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
 <script src="js/isotope.pkgd.min.js"></script>
-<script src="js/waypoints.min.js"></script>
-<script src="js/jquery.counterup.min.js"></script>
 <script src="js/simple-skillbar.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/mail-script.js"></script>
-<script src="js/main.js"></script>
+<script src="js/js.js"></script>
 
 </body>
 </html>

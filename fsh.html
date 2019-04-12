@@ -10,7 +10,21 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBn6fCNufbOC-dejg1Ojju8JOM-SiT9tQQ",
+            authDomain: "webapp1-e9db0.firebaseapp.com",
+            databaseURL: "https://webapp1-e9db0.firebaseio.com",
+            projectId: "webapp1-e9db0",
+            storageBucket: "webapp1-e9db0.appspot.com",
+            messagingSenderId: "1069990919899"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 </head>
 <body>
@@ -49,6 +63,13 @@
                             </ul>
                         </li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li class="menu-has-children"><a href="">Account</a>
+                            <ul>
+                                <li><a href="#signinModal" data-toggle="modal">Sign In</a></li>
+                                <li><a href="#signoutModal" data-toggle="modal">Sign Out</a></li>
+                                <li><a href="#addModal" data-toggle="modal">Add user</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -56,26 +77,142 @@
     </div>
 </header><!-- #header -->
 
-<!-- start banner Area -->
-<section class="banner-area">
-    <div class="container">
-        <div class="row fullscreen align-items-center justify-content-between">
-            <div class="col-lg-6 col-md-6 banner-left">
-                <h6>Hi, this is me</h6>
-                <h1>Will Mo</h1>
-                <p>I am currently a student at BCIT in the CIT program.
-                </p>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-lg-6 col-md-6 banner-right d-flex align-self-end">
-                <img class="img-fluid" src="images/hero-img.png" alt="">
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="addEmail">Email address</label>
+                        <input type="email" class="form-control" id="addEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="addPassword">Password</label>
+                        <input type="password" class="form-control" id="addPassword" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn" onclick="adduser()" data-dismiss="modal">Add User</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signinModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="signinEmail">Email address</label>
+                        <input type="email" class="form-control" id="signinEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signinPassword">Password</label>
+                        <input type="password" class="form-control" id="signinPassword" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn" onclick="signIn()" data-dismiss="modal">Sign in</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signoutModal" tabindex="-1" role="dialog" aria-labelledby="signoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signoutModalLabel">Sign out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to sign out?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn" onclick="signOut()" data-dismiss="modal">Sign Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- start banner Area -->
+<section class="about-banner">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1>
+                    Four Seasons Hotel
+                </h1>
             </div>
         </div>
     </div>
 </section>
 <!-- End banner Area -->
 
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 1000px; margin: 0 auto">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="images/fshlogo.png" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="images/outsideview.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="images/firstfloor.jpg" alt="Third slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="images/lobby.jpg" alt="Fourth slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="images/room.jpg" alt="Fifth slide">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color #DDDDD;"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
-
+<div class="col-lg-7 pt-60 ml-auto mr-auto">
+    <p>
+       Between October 2017 and May 2018, I interned at Four Seasons Hotel in Guangzhou, China. I wanted to have some real world experience as this was my first job. I wanted to be in the IT department,
+        but they said that they do not do internships for the IT department because they don't want to switch employees all the time. Since it was not possible and I still wanted to have experience, they offered
+        me a spot in the in room dining department. Although there were many challenges I faced, mainly language problems and talkign with guests, I still learned a lot. I managed to understand the back end of a high end hotel,
+        something that typical guests do not know of.
+    </p>
+</div>
+<br>
+<br>
 <!-- start footer Area -->
 <footer class="footer-area section-gap">
     <div class="container">
@@ -99,21 +236,10 @@
 <script src="js/vendor/jquery-2.2.4.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-<script src="js/easing.min.js"></script>
-<script src="js/hoverIntent.js"></script>
 <script src="js/superfish.min.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/jquery.tabs.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
 <script src="js/isotope.pkgd.min.js"></script>
-<script src="js/waypoints.min.js"></script>
-<script src="js/jquery.counterup.min.js"></script>
 <script src="js/simple-skillbar.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/mail-script.js"></script>
-<script src="js/main.js"></script>
+<script src="js/js.js"></script>
 
 </body>
 </html>
